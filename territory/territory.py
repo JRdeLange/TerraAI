@@ -26,3 +26,9 @@ class Territory:
             return self.neighbours[5]
         else:
             raise Exception("no such direction for territory neighbour")
+
+    def get_color(self):
+        if self.owner is None:
+            return [255, 255, 255]
+        else:
+            return self.owner.get_color()
