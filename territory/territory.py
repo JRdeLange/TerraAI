@@ -1,4 +1,8 @@
 class Territory:
 
-    def __init__(self):
-        pass
+    def __init__(self, x, y):
+        self.x_coordinate = x
+        self.y_coordinate = y
+
+        # variables that will be set when populating the world
+        self.owner = None
