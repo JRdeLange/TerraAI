@@ -8,11 +8,17 @@ class World:
         self.world_size = config.world_size
         self.territory_grid = []
 
+        # create a grid of territories
         for x in range(self.world_size):
             column = []
             for y in range(self.world_size):
                 column.append(Territory(x, y))
             self.territory_grid.append(column)
+
+        # for each territory in the grid, set its neighbours
+        for x in range(self.world_size):
+            for y in range(self.world_size):
+                self.territory_grid[x][y].set_neighbours(self.get_neighbouring_territories(self.territory_grid[x][y]))
 
     def get_territory(self, x, y):
         return self.territory_grid[x][y]
@@ -23,13 +29,19 @@ class World:
         y = territory.y_coordinate
 
         # Get the neighbour above the territory
-        neighbours.append(self.territory_grid[x][y + 1])
+        if not y == (self.world_size - 1):
+            neighbours.append(self.territory_grid[x][y + 1])
         # Get the neighbours up and left and up and right of the territory
-        neighbours.append(self.territory_grid[x + 1][y])
-        neighbours.append(self.territory_grid[x - 1][y])
+        if not x == (self.world_size - 1):
+            neighbours.append(self.territory_grid[x + 1][y])
+        if not x == 0:
+            neighbours.append(self.territory_grid[x - 1][y])
         # Get the three neighbours below the territory
-        neighbours.append(self.territory_grid[x + 1][y - 1])
-        neighbours.append(self.territory_grid[x][y - 1])
-        neighbours.append(self.territory_grid[x - 1][y - 1])
+        if not x == (self.world_size - 1) and not y == 0:
+            neighbours.append(self.territory_grid[x + 1][y - 1])
+        if not x == 0 and not y == 0:
+            neighbours.append(self.territory_grid[x - 1][y - 1])
+        if not y == 0:
+            neighbours.append(self.territory_grid[x][y - 1])
 
         return neighbours

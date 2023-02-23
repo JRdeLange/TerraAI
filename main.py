@@ -3,7 +3,6 @@ from world.world import World
 from view.view import View
 
 
-
 def main():
     world = World()
     environment = Environment(world)
