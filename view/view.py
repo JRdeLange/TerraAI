@@ -1,4 +1,5 @@
 from world.world import World
+import config
 import pygame
 
 
@@ -10,7 +11,6 @@ class View:
         self.width = config.window_width
         self.height = config.window_height
         self.window = pygame.display.set_mode([self.width, self.height])
-
 
     def tick(self):
         self.clear()
