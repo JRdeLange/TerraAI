@@ -23,8 +23,8 @@ class View:
     def draw_territories(self):
         pass
 
-    def draw_hexagon(self, hex):
-        pygame.draw.polygon(hex)
+    def draw_hexagon(self, hexagon):
+        pygame.draw.polygon(hexagon)
 
     def clear(self):
         self.window.fill((255, 255, 255))
