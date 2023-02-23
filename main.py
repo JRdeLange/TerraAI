@@ -1,5 +1,8 @@
-class World:
+from environment.environment import Environment
 
-    def __init__(self):
-        self.territories = []
-        
+def main():
+    environment = Environment()
+
+
+if __name__ == "__main__":
+    main()
