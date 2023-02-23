@@ -17,17 +17,20 @@ class View:
         self.clear()
 
         self.draw()
+        pygame.display.flip()
 
     def draw(self):
         self.draw_territories()
 
     def draw_territories(self):
-        hexagon = Hexagon(50, [0, 0], [255, 0, 0])
+        hexagon = Hexagon(60, [400, 400], [255, 0, 0])
+
+        self.draw_hexagon(hexagon)
 
     def draw_hexagon(self, hexagon):
         pygame.draw.polygon(self.window, hexagon.color, hexagon.vertices)
 
     def clear(self):
-        self.window.fill((255, 255, 255))
+        self.window.fill([255, 255, 255])
 
 
