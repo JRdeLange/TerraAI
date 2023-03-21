@@ -1,5 +1,6 @@
 # World settings
-world_size = 10
+world_width = 10
+world_height = 10
 number_of_lords = 3
 
 # Lord settings
