@@ -8,6 +8,7 @@ def main():
     environment = Environment(world)
     view = View(world)
     while True:
+        world.tick()
         view.tick()
 
 

@@ -9,6 +9,8 @@ class Soldier(Agent):
 
     def tick(self, observations):
         self.direction = vecmath.random_direction_vector()
+        if self.agent_id == 0:
+            print(self.direction)
         for observed_agent in observations:
             if observed_agent.get_team() != self.team:
                 enemy_position = observed_agent.get_pos()
@@ -16,9 +18,10 @@ class Soldier(Agent):
                     self.fight(observed_agent)
                 else:
                     self.charge(observed_agent.get_pos())
+        self.move()
 
     def charge(self, position):
-        self.direction = (position - self.pos).normalizad()
+        self.direction = (position - self.pos).normalized()
 
     def fight(self, enemy_agent):
         victory = random.randint(0, 1)

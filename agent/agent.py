@@ -6,11 +6,12 @@ from vecmath import vecmath
 class Agent:
 
     def __init__(self, agent_id, pos, team, death_function):
-        self.id = agent_id
+        self.agent_id = agent_id
         self.pos = pos
         self.team = team
         self.direction = vecmath.random_direction_vector()
 
+        self.death_function = death_function
         self.speed = config.standard_agent_speed
         self.radius = config.standard_agent_radius
         self.health = config.standard_agent_health
@@ -21,7 +22,7 @@ class Agent:
         self.move()
 
     def move(self):
-        self.pos += self.direction + self.speed
+        self.pos += self.direction * self.speed
 
     def get_team(self):
         return self.team
