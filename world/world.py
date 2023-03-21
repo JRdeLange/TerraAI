@@ -15,17 +15,27 @@ class World:
         self.init_agents()
 
     def init_agents(self):
+        agent_id = 0
         for x in range(config.number_of_agents):
             pos = vm.random_vector_2d(self.width, self.height)
             team = random.randint(0, 1)
-            new_agent = Agent(pos, team)
+            new_agent = Agent(agent_id, pos, team)
             self.agents.append(new_agent)
+            agent_id = agent_id + 1
 
     def tick(self):
         for agent in self.agents:
-            agent.move()
             agent_pos = agent.get_pos()
             agent_view_range = agent.get_view_range()
+            observations = self.observe_environment(agent_pos, agent_view_range)
+            agent.tick(observations)
+
+    def observe_environment(self, position, range):
+        observations = []
+        for agent in self.agents:
+            if (agent.pos - position).length() < range:
+                observations.append(agent)
+        return observations
 
     def get_agents(self):
         return self.agents
