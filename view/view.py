@@ -1,5 +1,4 @@
 from world.world import World
-from view.hexagon import Hexagon
 import config
 import pygame
 
