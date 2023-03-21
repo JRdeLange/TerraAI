@@ -6,10 +6,18 @@ A program where AI agents battle for world domination
 # Design things
 
 ## Environment
-Territories with neighbours
+Tick function
+    - Move agents
+    - Do game things
+    - etc
 
 ## Agents
-Overlords who move abstract "army points" around (for now)
-
+Tick function
+    - Move
+    - React
+    - Act
+    - etc
+   
 ## View
-PyGame
+Tick function
+    - Render stuff
