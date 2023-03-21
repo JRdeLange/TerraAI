@@ -1,4 +1,6 @@
-from world.world import World
+#from world.world import World
+from pygame_toolkit.pygame_toolkit import PygameToolkit
+from vecmath.Vec2D import Vec2D
 import config
 import pygame
 
@@ -6,43 +8,37 @@ import pygame
 class View:
 
     def __init__(self, world):
-        pygame.init()
-        self.world = world
-        self.width = config.window_width
-        self.height = config.window_height
-        self.window = pygame.display.set_mode([self.width, self.height])
-        self.hex_size = self.width - config.window_padding * 2
+        self.tk = PygameToolkit()
+        self.size = Vec2D(config.window_width, config.window_height)
+        self.window, self.clock = self.tk.init_pygame(self.size.x, self.size.y, "TerraAI")
 
-        self.hexagons = []
-        self.initialize_hexagons()
+        self.world = world
+
+        self.cache_sprites()
 
     def tick(self):
-        self.clear()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return
 
+        self.tk.clear(color=[30, 150, 30])
         self.draw()
         pygame.display.flip()
+        self.clock.tick(60)
 
     def draw(self):
-        self.draw_territories()
+        self.draw_agents()
 
-    def draw_territories(self):
-        for hexagon in self.hexagons:
-            self.draw_hexagon(hexagon)
+    def draw_agents(self):
+        for agent in self.world.get_agents:
+            sprite_name = "team_" + str(agent.team)
+            self.tk.render_sprite(sprite_name, self.transform_pos(agent.pos))
 
-    def draw_hexagon(self, hexagon):
-        pygame.draw.polygon(self.window, hexagon.get_color(), hexagon.get_vertices())
+    def cache_sprites(self):
+        self.tk.add_sprite("team_0", path="./assets/green.png", size=Vec2D(2, 2))
+        self.tk.add_sprite("team_1", path="./assets/red.png", size=Vec2D(2, 2))
 
-    def clear(self):
-        self.window.fill([130, 130, 130])
-
-    def initialize_hexagons(self):
-        for x in range(config.world_size):
-            for y in range(config.world_size):
-                territory = self.world.get_territory(x, y)
-                hexagon = Hexagon(15, territory)
-                self.hexagons.append(hexagon)
-
-
-
-
-
+    def transform_pos(self, world_space):
+        world_space /= Vec2D(self.world.get_width, self.world.get_height)
+        screen_space = world_space * self.size
+        return screen_space

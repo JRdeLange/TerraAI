@@ -10,7 +10,7 @@ class PygameToolkit:
 
         self.cached_sprites = {}
 
-    def init_pygame(self, height, width, title):
+    def init_pygame(self, width, height, title):
         pygame.init()
         window = pygame.display.set_mode([width, height])
         self.window = window
@@ -26,9 +26,9 @@ class PygameToolkit:
         self.window.fill(color)
 
     def add_sprite(self, name, path=None, surface=None, size=Vec2D(1, 1)):
-        sprite = pygame.image.load(path)
-        sprite = pygame.transform.scale_by(sprite, size.as_tuple())
         if path:
+            sprite = pygame.image.load(path)
+            sprite = pygame.transform.scale_by(sprite, size.as_tuple())
             self.cached_sprites[name] = sprite
         elif surface:
             self.cached_sprites[name] = surface

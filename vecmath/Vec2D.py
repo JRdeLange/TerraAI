@@ -1,5 +1,5 @@
 import math
-import vecmath.vecmath as vm
+import vecmath.vecmath
 
 
 class Vec2D:
@@ -55,10 +55,10 @@ class Vec2D:
         return new
 
     def angle_to(self, to):
-        return vm.wrapping_angle(self, to)
+        return vecmath.vecmath.wrapping_angle(self, to)
 
     def wrapping_vector_to(self, to, space_width, space_height):
-        return vm.wrapping_vector(self, to, space_width, space_height)
+        return vecmath.vecmath.wrapping_vector(self, to, space_width, space_height)
 
     # Redefine adding
     def __add__(self, other):
@@ -88,6 +88,8 @@ class Vec2D:
     def __mul__(self, other):
         if isinstance(other, (int, float)):
             return Vec2D(self.x * other, self.y * other)
+        if isinstance(other, Vec2D):
+            return Vec2D(self.x * other.x, self.y * other.y)
         else:
             raise TypeError("Multiplying unsupported thing with Vec2D")
 
@@ -98,6 +100,8 @@ class Vec2D:
     def __truediv__(self, other):
         if isinstance(other, (int, float)):
             return Vec2D(self.x / other, self.y / other)
+        if isinstance(other, Vec2D):
+            return Vec2D(self.x / other.x, self.y / other.y)
         else:
             raise TypeError("unsupported operand type(s) for /")
 
