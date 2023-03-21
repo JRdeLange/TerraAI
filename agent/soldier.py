@@ -1,9 +1,9 @@
-import agent
 import random
+from agent.agent import Agent
 from vecmath import vecmath
 
 
-class Soldier(agent):
+class Soldier(Agent):
     def __init__(self, agent_id, pos, team, death_function):
         super().__init__(agent_id, pos, team, death_function)
 
