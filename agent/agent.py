@@ -5,8 +5,8 @@ from vecmath import vecmath
 
 class Agent:
 
-    def __init__(self, id, pos, team):
-        self.id = id
+    def __init__(self, agent_id, pos, team, death_function):
+        self.id = agent_id
         self.pos = pos
         self.team = team
         self.direction = vecmath.random_direction_vector()
@@ -16,9 +16,7 @@ class Agent:
         self.view_range = config.standard_agent_view_range
 
     def tick(self, observations):
-        for observation in observations:
-            if observation.get_team() != self.team:
-                pass
+        self.direction = vecmath.random_direction_vector()
         self.move()
 
     def move(self):

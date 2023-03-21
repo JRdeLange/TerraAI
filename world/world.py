@@ -1,7 +1,7 @@
 import config
 import random
 import vecmath.vecmath as vm
-from agent.agent import Agent
+from agent.soldier import Soldier
 import math
 
 
@@ -19,7 +19,7 @@ class World:
         for x in range(config.number_of_agents):
             pos = vm.random_vector_2d(self.width, self.height)
             team = random.randint(0, 1)
-            new_agent = Agent(agent_id, pos, team)
+            new_agent = Soldier(agent_id, pos, team, self.agent_died)
             self.agents.append(new_agent)
             agent_id = agent_id + 1
 
@@ -30,12 +30,15 @@ class World:
             observations = self.observe_environment(agent_pos, agent_view_range)
             agent.tick(observations)
 
-    def observe_environment(self, position, range):
+    def observe_environment(self, position, view_range):
         observations = []
         for agent in self.agents:
-            if (agent.pos - position).length() < range:
+            if (agent.pos - position).length() < view_range:
                 observations.append(agent)
         return observations
+
+    def agent_died(self, agent):
+        self.agents.remove(agent)
 
     def get_agents(self):
         return self.agents
