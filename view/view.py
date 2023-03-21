@@ -30,7 +30,7 @@ class View:
         self.draw_agents()
 
     def draw_agents(self):
-        for agent in self.world.get_agents:
+        for agent in self.world.get_agents():
             sprite_name = "team_" + str(agent.team)
             self.tk.render_sprite(sprite_name, self.transform_pos(agent.pos))
 
@@ -39,6 +39,6 @@ class View:
         self.tk.add_sprite("team_1", path="./assets/red.png", size=Vec2D(2, 2))
 
     def transform_pos(self, world_space):
-        world_space /= Vec2D(self.world.get_width, self.world.get_height)
+        world_space /= Vec2D(self.world.get_world_width(), self.world.get_world_height())
         screen_space = world_space * self.size
         return screen_space

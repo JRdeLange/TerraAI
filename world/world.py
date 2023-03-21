@@ -12,6 +12,8 @@ class World:
         self.height = config.world_height
         self.width = config.world_width
 
+        self.init_agents()
+
     def init_agents(self):
         for x in range(config.number_of_agents):
             pos = vm.random_vector_2d(self.width, self.height)
