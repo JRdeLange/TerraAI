@@ -9,7 +9,7 @@ class Collisionator:
 
         self.coll_cell_size = config.collision_biggest_agent
         self.coll_map_size = Vec2D(int(self.world.get_world_width() / self.coll_cell_size),
-                                   int(self.world.get_world_height()/ self.coll_cell_size))
+                                   int(self.world.get_world_height() / self.coll_cell_size))
         self.coll_map_size += 1
 
         self.collision_map = [[CollisionCell() for x in range(self.coll_map_size.x)]
@@ -25,7 +25,9 @@ class Collisionator:
         for agent in agents:
             x = int(agent.pos.x / self.coll_cell_size)
             y = int(agent.pos.y / self.coll_cell_size)
-            print(x, y)
+
+            self.collision_map[x][y].add_agent(agent)
+
 
 class CollisionCell:
 
