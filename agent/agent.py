@@ -12,6 +12,7 @@ class Agent:
         self.direction = vecmath.random_direction_vector()
 
         self.speed = config.standard_agent_speed
+        self.radius = config.standard_agent_radius
         self.health = config.standard_agent_health
         self.view_range = config.standard_agent_view_range
 

@@ -2,6 +2,7 @@ import config
 import random
 import vecmath.vecmath as vm
 from agent.agent import Agent
+from world.collisionator import Collisionator
 import math
 
 
@@ -13,6 +14,8 @@ class World:
         self.width = config.world_width
 
         self.init_agents()
+
+        self.collisionator = Collisionator(self)
 
     def init_agents(self):
         agent_id = 0
