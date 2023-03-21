@@ -1,13 +1,15 @@
 # World settings
 world_width = 1200
 world_height = 800
-number_of_lords = 3
-
-# Lord settings
-lord_names = ["Anita", "Broderick", "Cibrin"]
-lord_colors = [[255, 0, 0], [0, 0, 255], [0, 255, 0]]
+number_of_agents = 10
 
 # View settings
 window_width = 1200
 window_height = 800
 window_padding = 20
+
+# Agent profiles
+# Base Agent
+standard_agent_view_range = 10
+standard_agent_health = 10
+standard_agent_speed = 10
